@@ -9,8 +9,8 @@ function renderAt(path: string) {
   return render(<App />)
 }
 
-describe('app routes', () => {
-  it('renders the Resources route with app navigation', () => {
+describe('App routes', () => {
+  it('should render the Resources route with app navigation', () => {
     renderAt('/')
 
     expect(screen.getByRole('heading', { level: 1, name: 'Resources' })).toBeInTheDocument()
@@ -18,7 +18,7 @@ describe('app routes', () => {
     expect(screen.getByRole('link', { name: 'Applications' })).toBeInTheDocument()
   })
 
-  it('renders the Applications route with app navigation', () => {
+  it('should render the Applications route with app navigation', () => {
     renderAt('/applications')
 
     expect(screen.getByRole('heading', { level: 1, name: 'Applications' })).toBeInTheDocument()
