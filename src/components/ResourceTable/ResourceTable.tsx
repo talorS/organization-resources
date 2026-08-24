@@ -1,5 +1,6 @@
 import type { Resource } from '../../domain/resource'
 import { ResourceTableHeader } from './ResourceTableHeader'
+import { resourceTableColumns } from './resourceTableColumns'
 import { ResourceTableRow } from './ResourceTableRow'
 
 type ResourceTableProps = {
@@ -13,7 +14,7 @@ export function ResourceTable({ resources }: ResourceTableProps) {
       <tbody>
         {resources.length === 0 ? (
           <tr>
-            <td colSpan={6}>No resources found.</td>
+            <td colSpan={resourceTableColumns.length}>No resources found.</td>
           </tr>
         ) : (
           resources.map((resource) => (

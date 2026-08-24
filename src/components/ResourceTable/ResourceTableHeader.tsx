@@ -1,19 +1,12 @@
-const columnHeaders = [
-  'Name',
-  'Type',
-  'Provider',
-  'Environment',
-  'Severity',
-  'Open Issues',
-] as const;
+import { resourceTableColumns } from './resourceTableColumns'
 
 export function ResourceTableHeader() {
   return (
     <thead>
       <tr>
-        {columnHeaders.map((columnHeader) => (
-          <th key={columnHeader} scope="col">
-            {columnHeader}
+        {resourceTableColumns.map((column) => (
+          <th key={column.key} scope="col">
+            {column.label}
           </th>
         ))}
       </tr>
