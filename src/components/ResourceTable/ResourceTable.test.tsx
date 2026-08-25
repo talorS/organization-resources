@@ -27,7 +27,7 @@ const columnHeaders = [
 
 describe('ResourceTable', () => {
   it('should render resource data in a semantic table', () => {
-    render(<ResourceTable resources={[resource]} />)
+    render(<ResourceTable resources={[resource]} selectedIds={[]} onToggle={() => {}} />)
 
     expect(screen.getByRole('table')).toBeInTheDocument()
 
@@ -48,7 +48,7 @@ describe('ResourceTable', () => {
   })
 
   it('should render an empty state when there are no resources', () => {
-    render(<ResourceTable resources={[]} />)
+    render(<ResourceTable resources={[]} selectedIds={[]} onToggle={() => {}} />)
 
     expect(screen.getByText('No resources found.')).toBeInTheDocument()
   })

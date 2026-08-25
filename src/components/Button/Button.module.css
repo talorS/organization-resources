@@ -21,7 +21,7 @@
 }
 
 .primary:hover:not(:disabled) {
-  filter: brightness(0.92);
+  filter: brightness(0.9);
 }
 
 .primary:disabled {
@@ -36,5 +36,5 @@
 }
 
 .secondary:hover {
-  border-width: 2px;
+  filter: brightness(0.9);
 }

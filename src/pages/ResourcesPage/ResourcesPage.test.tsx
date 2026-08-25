@@ -96,7 +96,7 @@ describe('ResourcesPage', () => {
     expect(screen.getByRole('cell', { name: 'analytics-bq-prod' })).toBeInTheDocument()
     expect(screen.queryByRole('cell', { name: 'payments-api-prod' })).not.toBeInTheDocument()
     expect(screen.getByText('1-4 of 4')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Clear Filters' })).toBeInTheDocument()
     expect(screen.getByTestId('location')).toHaveTextContent('?provider=GCP')
   })
 
@@ -104,12 +104,90 @@ describe('ResourcesPage', () => {
     const user = userEvent.setup()
     renderResourcesPage('/?search=payments&provider=AWS')
 
-    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Clear Filters' })).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Clear filters' }))
+    await user.click(screen.getByRole('button', { name: 'Clear Filters' }))
 
     expect(screen.getByLabelText('Provider')).toHaveValue('')
     expect(screen.getByTestId('location')).toHaveTextContent('?search=payments')
     expect(screen.getByRole('cell', { name: 'payments-api-prod' })).toBeInTheDocument()
   })
+  
+  it('should remove whitespace-only searches from the URL', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage('/?search=payments')
+
+    const searchInput = screen.getByLabelText('Search')
+    await user.clear(searchInput)
+    await user.type(searchInput, ' ')
+
+    await waitFor(() => {
+      expect(screen.getByTestId('location')).toHaveTextContent('')
+      expect(screen.getByText('1-5 of 12')).toBeInTheDocument()
+    })
+  })
+
+  it('should select and deselect a resource when its row is clicked', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage()
+
+    const resourceRow = screen.getByRole('row', {
+      name: /payments-api-prod EC2 Instance AWS production critical 4/,
+    })
+
+    await user.click(resourceRow)
+
+    expect(resourceRow).toHaveAttribute('data-selected', 'true')
+    expect(screen.getByText('1 resource selected')).toBeInTheDocument()
+
+    await user.click(resourceRow)
+
+    expect(resourceRow).not.toHaveAttribute('data-selected')
+    expect(screen.queryByText('0 resources selected')).not.toBeInTheDocument()
+  })
+
+  it('should clear the selected resources', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage()
+
+    const resourceRow = screen.getByRole('row', {
+      name: /payments-api-prod EC2 Instance AWS production critical 4/,
+    })
+    await user.click(resourceRow)
+    expect(resourceRow).toHaveAttribute('data-selected', 'true')
+
+    await user.click(screen.getByRole('button', { name: 'Clear' }))
+
+    expect(resourceRow).not.toHaveAttribute('data-selected')
+    expect(screen.queryByText('0 resources selected')).not.toBeInTheDocument()
+  })
+
+  it('should preserve a selection when search temporarily hides the resource', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage()
+
+    const resourceRow = screen.getByRole('row', {
+      name: /auth-lambda-prod Lambda Function AWS production high 0/,
+    })
+    await user.click(resourceRow)
+
+    const searchInput = screen.getByLabelText('Search')
+    await user.type(searchInput, 'payments')
+
+    await waitFor(() => {
+      expect(screen.queryByRole('row', { name: /auth-lambda-prod/ })).not.toBeInTheDocument()
+    })
+
+    await user.clear(searchInput)
+
+    await waitFor(() => {
+      expect(
+        screen.getByRole('row', {
+          name: /auth-lambda-prod Lambda Function AWS production high 0/,
+        }),
+      ).toHaveAttribute('data-selected', 'true')
+      expect(screen.getByText('1 resource selected')).toBeInTheDocument()
+    })
+  })
+
 })

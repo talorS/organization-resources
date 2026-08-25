@@ -1,10 +1,12 @@
 import { Pagination } from '../../components/Pagination/Pagination'
+import { Selection } from '../../components/Selection/Selection'
 import { ResourceFilters } from '../../components/ResourceFilters/ResourceFilters'
 import { ResourceSearch } from '../../components/ResourceSearch/ResourceSearch'
 import { ResourceTable } from '../../components/ResourceTable/ResourceTable'
 import { useResourcePagination } from '../../customHooks/useResourcePagination'
 import { useResourceQueryParams } from '../../customHooks/useResourceQueryParams'
 import { useResourceSearch } from '../../customHooks/useResourceSearch'
+import { useResourceSelection } from '../../customHooks/useResourceSelection'
 import type { ResourceFilters as ResourceFiltersValue } from '../../domain/resource'
 import { resources } from '../../seed/resources'
 import { filterResources } from '../../utils/filterResources'
@@ -21,6 +23,7 @@ export function ResourcesPage() {
   } = useResourceQueryParams()
   const filteredResources = filterResources(resources, { search, filters })
   const pagination = useResourcePagination(filteredResources)
+  const selection = useResourceSelection()
 
   function handleDebouncedSearch(nextSearch: string) {
     pagination.resetPage()
@@ -47,7 +50,7 @@ export function ResourcesPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>Resources</h1>
         <p className={styles.subtitle}>
-          Search, filter or select resources to group into an Application
+          Search, filter or select multiple resources and create a named Application
         </p>
       </header>
 
@@ -63,6 +66,8 @@ export function ResourcesPage() {
 
       <ResourceTable
         resources={pagination.paginatedResources}
+        selectedIds={selection.selectedResourceIds}
+        onToggle={selection.toggleResource}
         footer={
           <Pagination
             currentPage={pagination.currentPage}
@@ -76,6 +81,13 @@ export function ResourcesPage() {
           />
         }
       />
+      {selection.selectedCount > 0 && (
+        <Selection
+          count={selection.selectedCount}
+          onClear={selection.clearSelection}
+          onCreate={() => { }}
+        />
+      )}
     </div>
   )
 }

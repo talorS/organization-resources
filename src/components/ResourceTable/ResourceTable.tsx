@@ -7,10 +7,17 @@ import styles from './ResourceTable.module.css'
 
 type ResourceTableProps = {
   resources: readonly Resource[]
+  selectedIds: readonly string[]
+  onToggle: (resourceId: string) => void
   footer?: ReactNode
 }
 
-export function ResourceTable({ resources, footer }: ResourceTableProps) {
+export function ResourceTable({
+  resources,
+  selectedIds,
+  onToggle,
+  footer,
+}: ResourceTableProps) {
   return (
     <div className={styles.wrapper}>
       <table className={styles.table}>
@@ -22,7 +29,12 @@ export function ResourceTable({ resources, footer }: ResourceTableProps) {
             </tr>
           ) : (
             resources.map((resource) => (
-              <ResourceTableRow key={resource.id} resource={resource} />
+              <ResourceTableRow
+                key={resource.id}
+                resource={resource}
+                isSelected={selectedIds.includes(resource.id)}
+                onSelect={() => onToggle(resource.id)}
+              />
             ))
           )}
         </tbody>

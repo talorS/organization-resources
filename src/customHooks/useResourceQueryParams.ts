@@ -29,12 +29,13 @@ export function useResourceQueryParams() {
   )
 
   function updateSearch(nextSearch: string) {
+    const normalizedSearch = nextSearch.trim();
     const updatedSearchParams = new URLSearchParams(searchParams)
 
-    if (nextSearch === '') {
+    if (normalizedSearch === '') {
       updatedSearchParams.delete('search')
     } else {
-      updatedSearchParams.set('search', nextSearch)
+      updatedSearchParams.set('search', normalizedSearch)
     }
 
     setSearchParams(updatedSearchParams)

@@ -1,0 +1,21 @@
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--background-color);
+    border-top: 1px solid var(--card-border-color);
+    padding: 0.75rem 1.5rem;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.count {
+    font-weight: 500;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
