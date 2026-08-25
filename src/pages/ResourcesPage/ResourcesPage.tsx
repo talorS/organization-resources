@@ -3,11 +3,26 @@ import { ResourceFilters } from '../../components/ResourceFilters/ResourceFilter
 import { ResourceSearch } from '../../components/ResourceSearch/ResourceSearch'
 import { ResourceTable } from '../../components/ResourceTable/ResourceTable'
 import { useResourcePagination } from '../../customHooks/useResourcePagination'
+import { useResourceQueryParams } from '../../customHooks/useResourceQueryParams'
+import { useResourceSearch } from '../../customHooks/useResourceSearch'
 import { resources } from '../../seed/resources'
+import { filterResources } from '../../utils/filterResources'
 import styles from './ResourcesPage.module.css'
 
 export function ResourcesPage() {
-  const pagination = useResourcePagination(resources)
+  const { search, filters, updateSearch } = useResourceQueryParams();
+  const filteredResources = filterResources(resources, { search, filters });
+  const pagination = useResourcePagination(filteredResources);
+
+  function handleDebouncedSearch(nextSearch: string) {
+    pagination.resetPage()
+    updateSearch(nextSearch)
+  }
+
+  const { searchInput, setSearchInput } = useResourceSearch({
+    search,
+    onDebouncedSearch: handleDebouncedSearch,
+  })
 
   return (
     <div className={styles.page}>
@@ -19,7 +34,7 @@ export function ResourcesPage() {
       </header>
 
       <div className={styles.toolbar}>
-        <ResourceSearch onDebounceSearch={() => {}} />
+        <ResourceSearch value={searchInput} onChange={setSearchInput} />
         <ResourceFilters />
       </div>
 

@@ -9,18 +9,18 @@ export function filterResources(
   query: ResourceQuery = {},
 ): Resource[] {
   const { search = '', filters = {} } = query;
-  const normalizedSearch = search.toLowerCase()
+  const normalizedSearch = search.trim().toLowerCase();
 
   return resources.filter((resource) => {
     const matchesSearch = resource.name
       .toLowerCase()
-      .includes(normalizedSearch)
+      .includes(normalizedSearch);
 
     const matchesFilters = resourceFilterKeys.every(
       (key) =>
         filters[key] === undefined ||
         resource[key] === filters[key],
-    )
+    );
 
     return matchesSearch && matchesFilters
   })

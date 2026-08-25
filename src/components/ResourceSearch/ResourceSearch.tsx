@@ -1,22 +1,23 @@
-import { Field } from "../Field/Field";
-import styles from "./ResourceSearch.module.css";
+import { Field } from '../Field/Field'
+import styles from './ResourceSearch.module.css'
 
 type ResourceSearchProps = {
-  onDebounceSearch: (value: string) => void;
-};
+  value: string
+  onChange: (value: string) => void
+}
 
-export function ResourceSearch({ onDebounceSearch }: ResourceSearchProps) {
-
+export function ResourceSearch({ value, onChange }: ResourceSearchProps) {
   return (
     <Field label="Search">
       <input
-        id='resource-search'
+        id="resource-search"
+        aria-label="Search"
         type="search"
         className={styles.input}
-        // value={searchInput}
-        // onChange={(event) => setSearchInput(event.target.value)}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
         placeholder="Search by name"
       />
     </Field>
-  );
+  )
 }

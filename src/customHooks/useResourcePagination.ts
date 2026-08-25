@@ -29,6 +29,10 @@ export function useResourcePagination(resources: readonly Resource[]) {
     setCurrentPage(1)
   }
 
+  function resetPage() {
+    setCurrentPage(1)
+  }
+
   return {
     currentPage,
     rowsPerPage,
@@ -39,5 +43,6 @@ export function useResourcePagination(resources: readonly Resource[]) {
     paginatedResources,
     goToPage,
     changeRowsPerPage,
+    resetPage,
   }
 }
