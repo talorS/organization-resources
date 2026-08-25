@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter, useLocation } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
+import { AppLayout } from '../../components/AppLayout/AppLayout'
 import { resources } from '../../seed/resources'
 import { ResourcesPage } from './ResourcesPage'
 
@@ -13,7 +14,11 @@ function LocationDisplay() {
 function renderResourcesPage(initialEntry = '/') {
   return render(
     <MemoryRouter initialEntries={[initialEntry]}>
-      <ResourcesPage />
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route index element={<ResourcesPage />} />
+        </Route>
+      </Routes>
       <LocationDisplay />
     </MemoryRouter>,
   )
