@@ -6,7 +6,7 @@ Build a responsive frontend for browsing cloud resources, grouping selected reso
 
 ## Requirements
 
-1. Display local mock resources in a table.
+1. Display a local dataset of 12 cloud resources in a table with name, type, provider, environment, severity, and open issues.
 2. Support search by resource name.
 3. Support filtering by provider, environment, and severity.
 4. Store search and filter values in the URL.
@@ -32,7 +32,7 @@ Build a responsive frontend for browsing cloud resources, grouping selected reso
 
 ## Acceptance Criteria
 
-- [ ] Resources are displayed in a table.
+- [ ] The table displays name, type, provider, environment, severity, and open issues for 12 local resources.
 - [ ] Search and filters work together and update the URL.
 - [ ] Clear filters preserves the search query.
 - [ ] Users can select, deselect, and clear multiple resources.
@@ -53,6 +53,7 @@ Build a responsive frontend for browsing cloud resources, grouping selected reso
 - Local state for selection and modal visibility.
 - App-level shared client state for Applications.
 - Applications store `resourceIds`, not copied Resource objects.
+- The final README documents the fresh-clone command, what was built, next steps, and AI usage.
 
 ## Decisions
 

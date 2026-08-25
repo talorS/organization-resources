@@ -16,3 +16,17 @@ export type Resource = {
   tags: string[]
   openIssues: number
 }
+
+export const resourceFilterKeys = [
+  'provider',
+  'environment',
+  'severity',
+] as const
+
+export type ResourceFilterKey = (typeof resourceFilterKeys)[number]
+
+export type ResourceFilters = Partial<
+  Pick<Resource, ResourceFilterKey>
+> & {
+  search?: string
+}

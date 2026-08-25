@@ -13,3 +13,7 @@ export const resourceTableColumns = [
   { key: 'severity', label: 'Severity' },
   { key: 'openIssues', label: 'Open Issues' },
 ] as const satisfies readonly ResourceTableColumn[]
+
+
+export type ResourceTableColumnKey =
+  (typeof resourceTableColumns)[number]["key"];

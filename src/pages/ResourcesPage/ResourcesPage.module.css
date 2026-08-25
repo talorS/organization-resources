@@ -1,0 +1,24 @@
+.page {
+  color: var(--text-color);
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+}

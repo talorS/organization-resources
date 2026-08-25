@@ -1,0 +1,18 @@
+.input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--card-border-color);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+  margin: auto;
+}
+
+.input:focus {
+  outline: 2px solid var(--card-border-color);
+  outline-offset: 1px;
+}
+
+.input::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}

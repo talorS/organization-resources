@@ -1,0 +1,53 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.rowsPerPageLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rowsPerPageLabel select {
+  padding: 0.35rem;
+  border: 1px solid var(--card-border-color);
+  border-radius: 4px;
+  background: var(--background-color);
+  color: var(--text-color);
+  font: inherit;
+}
+
+.displayedRows {
+  min-width: 5.5rem;
+  text-align: center;
+  margin-left: auto;
+}
+
+.actions {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.actions button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--card-border-color);
+  border-radius: 6px;
+  background: var(--background-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.actions button svg {
+  font-size: 1.25rem;
+}
+
+.actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

@@ -51,7 +51,7 @@ src/
 ## Chunk 2 — Domain and mock data
 
 - Define `Resource`, `Provider`, `Environment`, `Severity`, and `Application`.
-- Add fixed Resources under `seed/resources.ts`.
+- Add 12 fixed Resources under `seed/resources.ts`, varied across providers, environments, and severity values.
 - Add a small helper to resolve Resources by IDs.
 
 **TDD:** RED → GREEN → REFACTOR for data invariants, unique IDs, and resource lookup.
@@ -65,6 +65,7 @@ src/
 - Add `ResourcesPage`.
 - Implement a domain-specific `ResourceTable`.
 - Add table header, rows, and no-results state.
+- Show the assignment's six required columns: name, type, provider, environment, severity, and open issues.
 - Use semantic table markup and accessible checkbox labels.
 
 **TDD:** RED → GREEN → REFACTOR for displayed rows, columns, and empty state.
@@ -138,8 +139,9 @@ src/
 
 ## Chunk 8 — Final quality review
 
-- Review mobile layout.
+- Review mobile layout and the overall visual polish.
 - Verify semantic markup, labels, keyboard controls, and modal behavior.
+- Replace the Vite README with project instructions (`npm install && npm run dev`), a summary of what was built, next steps, and AI usage.
 - Remove duplication only where it makes the code simpler.
 
 **TDD:** Add tests only for changed behavior; verify responsive and keyboard flows manually.

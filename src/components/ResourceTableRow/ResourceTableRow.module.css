@@ -1,0 +1,44 @@
+.row {
+  cursor: pointer;
+}
+
+.row:hover {
+  outline: 2px solid var(--card-border-color);
+}
+
+.selected {
+  outline: 2px solid var(--card-border-color);
+}
+
+.checkboxCell {
+  width: 2.5rem;
+}
+
+.severity {
+  text-transform: capitalize;
+  border-radius: 0px;
+}
+
+.low {
+  background: var(--low-bg);
+  border-color: var(--low-border);
+  color: var(--low-color);
+}
+
+.medium {
+  background: var(--medium-bg);
+  border-color: var(--medium-border);
+  color: var(--medium-color);
+}
+
+.high {
+  background: var(--high-bg);
+  border-color: var(--high-border);
+  color: var(--high-color);
+}
+
+.critical {
+  background: var(--critical-bg);
+  border-color: var(--critical-border);
+  color: var(--critical-color);
+}
