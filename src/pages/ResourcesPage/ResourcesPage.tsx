@@ -5,18 +5,36 @@ import { ResourceTable } from '../../components/ResourceTable/ResourceTable'
 import { useResourcePagination } from '../../customHooks/useResourcePagination'
 import { useResourceQueryParams } from '../../customHooks/useResourceQueryParams'
 import { useResourceSearch } from '../../customHooks/useResourceSearch'
+import type { ResourceFilters as ResourceFiltersValue } from '../../domain/resource'
 import { resources } from '../../seed/resources'
 import { filterResources } from '../../utils/filterResources'
 import styles from './ResourcesPage.module.css'
 
 export function ResourcesPage() {
-  const { search, filters, updateSearch } = useResourceQueryParams();
-  const filteredResources = filterResources(resources, { search, filters });
-  const pagination = useResourcePagination(filteredResources);
+  const {
+    search,
+    filters,
+    hasActiveFilters,
+    updateSearch,
+    updateFilters,
+    clearFilters,
+  } = useResourceQueryParams()
+  const filteredResources = filterResources(resources, { search, filters })
+  const pagination = useResourcePagination(filteredResources)
 
   function handleDebouncedSearch(nextSearch: string) {
     pagination.resetPage()
     updateSearch(nextSearch)
+  }
+
+  function handleFilterChange(nextFilters: ResourceFiltersValue) {
+    pagination.resetPage()
+    updateFilters(nextFilters)
+  }
+
+  function handleClearFilters() {
+    pagination.resetPage()
+    clearFilters()
   }
 
   const { searchInput, setSearchInput } = useResourceSearch({
@@ -35,7 +53,12 @@ export function ResourcesPage() {
 
       <div className={styles.toolbar}>
         <ResourceSearch value={searchInput} onChange={setSearchInput} />
-        <ResourceFilters />
+        <ResourceFilters
+          filters={filters}
+          hasActiveFilters={hasActiveFilters}
+          onChange={handleFilterChange}
+          onClear={handleClearFilters}
+        />
       </div>
 
       <ResourceTable

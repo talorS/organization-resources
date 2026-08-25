@@ -1,0 +1,40 @@
+.button {
+  border-radius: 6px;
+  cursor: pointer;
+  font: inherit;
+}
+
+.small {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8125rem;
+}
+
+.medium {
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+
+.primary {
+  border: none;
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.primary:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.secondary {
+  border: 1px solid var(--card-border-color);
+  background: var(--background-color);
+  color: var(--text-color);
+}
+
+.secondary:hover {
+  border-width: 2px;
+}

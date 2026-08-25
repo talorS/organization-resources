@@ -86,4 +86,30 @@ describe('ResourcesPage', () => {
     expect(screen.getByRole('cell', { name: 'payments-api-prod' })).toBeInTheDocument()
     expect(screen.queryByRole('cell', { name: 'auth-lambda-prod' })).not.toBeInTheDocument()
   })
+
+  it('should filter resources by provider and update the URL', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage()
+
+    await user.selectOptions(screen.getByLabelText('Provider'), 'GCP')
+
+    expect(screen.getByRole('cell', { name: 'analytics-bq-prod' })).toBeInTheDocument()
+    expect(screen.queryByRole('cell', { name: 'payments-api-prod' })).not.toBeInTheDocument()
+    expect(screen.getByText('1-4 of 4')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument()
+    expect(screen.getByTestId('location')).toHaveTextContent('?provider=GCP')
+  })
+
+  it('should clear active filters while preserving the search query', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage('/?search=payments&provider=AWS')
+
+    expect(screen.getByRole('button', { name: 'Clear filters' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }))
+
+    expect(screen.getByLabelText('Provider')).toHaveValue('')
+    expect(screen.getByTestId('location')).toHaveTextContent('?search=payments')
+    expect(screen.getByRole('cell', { name: 'payments-api-prod' })).toBeInTheDocument()
+  })
 })

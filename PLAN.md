@@ -78,7 +78,6 @@ src/
 
 - Implement `useResourceQueryParams`.
 - Store search, provider, environment, and severity in the URL.
-- Build `ResourceToolbar` from `ResourceSearch` and `ResourceFilters`.
 - Add debounced search URL updates.
 - Implement pure `filterResources`.
 - Add Clear filters without clearing search.
