@@ -1,32 +1,46 @@
-# React + TypeScript + Vite
+# Gambit Security Frontend Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A responsive React application for browsing cloud resources, creating logical
+Applications from selected resources, and visualizing each Application as a
+resource graph.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Open the local URL shown in the terminal.
+
+## What was built
+
+- A Resources page with a local cloud-resource dataset.
+- Search and provider, environment, and severity filters stored in the URL.
+- A responsive, paginated resources table with multi-resource selection.
+- Application creation with client-side validation and a success notification.
+- Shared in-memory Application state for the current browser session.
+- An Applications page with cards, pagination, and a static SVG graph of each
+  Application's member resources.
+- Semantic HTML, labelled controls, keyboard-usable buttons and selects, and
+  native dialog-based modals.
+
+## Technical choices
+
+- React, TypeScript, React Router, and Vite.
+- Static local data: no backend, authentication, or persistence is included.
+- Resource IDs are stored on an Application instead of copying Resource data.
+- Search and filters live in the URL so the Resources view can be refreshed or
+  shared without losing them.
+
+## Next steps
+
+- Replace local mock data and in-memory state with a backend API.
+- Persist Applications and support editing or deletion.
+- Add server-side filtering and pagination for large datasets.
+
+## AI usage
+
+AI was used as a pair-programming assistant to discuss requirements and
+architecture, propose implementation steps, review and implement the code in the PLAN.md file (in chunks). 
+I did all technical decisions and product judgment and defind the SPEC.md file.

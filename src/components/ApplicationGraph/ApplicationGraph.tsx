@@ -1,11 +1,12 @@
 import type { Application } from '../../domain/application'
 import { getResourcesByIds } from '../../utils/getResourcesByIds'
 import { getRadialLayout } from '../../utils/getRadialLayout'
-import { resources } from '../../seed/resources'
 import styles from './ApplicationGraph.module.css'
+import type { Resource } from '../../domain/resource'
 
 type ApplicationGraphProps = {
   application: Application
+  resources: Resource[]
 }
 
 const graphSize = {
@@ -16,7 +17,7 @@ const graphSize = {
   radius: 200,
 }
 
-export function ApplicationGraph({ application }: ApplicationGraphProps) {
+export function ApplicationGraph({ application, resources }: ApplicationGraphProps) {
   const applicationResources = getResourcesByIds(resources, application.resourceIds)
   const resourcePositions = getRadialLayout(
     application.resourceIds,
@@ -24,7 +25,7 @@ export function ApplicationGraph({ application }: ApplicationGraphProps) {
   )
 
   return (
-    <section className={styles.graph} aria-labelledby="application-graph-title">
+    <section className={styles.graph}>
       <svg
         className={styles.svg}
         viewBox={`0 0 ${graphSize.width} ${graphSize.height}`}

@@ -24,13 +24,14 @@ export function Modal({ title, onClose, children }: ModalProps) {
     <dialog
       ref={dialogRef}
       className={styles.dialog}
+      aria-labelledby="modal-title"
       onCancel={(event) => {
         event.preventDefault()
         onClose()
       }}
     >
       <header className={styles.header}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 id="modal-title" className={styles.title}>{title}</h2>
         <Button
           variant="secondary"
           size="small"

@@ -6,6 +6,7 @@ import { Modal } from '../../components/Modal/Modal'
 import { Pagination } from '../../components/Pagination/Pagination'
 import { useApplications } from '../../customHooks/useApplications'
 import { usePagination } from '../../customHooks/usePagination'
+import { resources } from '../../seed/resources'
 import styles from './ApplicationsPage.module.css'
 
 export function ApplicationsPage() {
@@ -52,7 +53,7 @@ export function ApplicationsPage() {
           title={`Application: ${selectedApplication.name}`}
           onClose={() => setSelectedApplicationId(null)}
         >
-          <ApplicationGraph application={selectedApplication} />
+          <ApplicationGraph application={selectedApplication} resources={resources} />
         </Modal>
       )}
     </div>

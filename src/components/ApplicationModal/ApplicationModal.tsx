@@ -31,6 +31,7 @@ export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
                         id="application-name"
                         className={styles.input}
                         type="text"
+                        aria-label="Application name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         placeholder="Application name"

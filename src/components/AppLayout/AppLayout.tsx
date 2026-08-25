@@ -9,7 +9,7 @@ export function AppLayout() {
     <div className={styles.layout}>
       <header className={styles.header}>
         <span className={styles.brand}>@Talor Samara - Gambit's FE Assignment</span>
-        <nav className={styles.nav}>
+        <nav className={styles.nav} aria-label="Primary navigation">
           <NavLink
             to="/"
             end

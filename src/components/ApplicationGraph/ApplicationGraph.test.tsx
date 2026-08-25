@@ -40,8 +40,7 @@ const resources: Resource[] = [
 describe('ApplicationGraph', () => {
   it('should render the Application and its member resources in an SVG graph', () => {
     render(<ApplicationGraph application={application} resources={resources} />)
-
-    expect(screen.getByRole('heading', { name: 'Application graph' })).toBeInTheDocument()
+    
     expect(
       screen.getByRole('img', {
         name: 'Payments API connected to 2 resources',
