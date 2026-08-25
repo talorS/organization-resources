@@ -11,6 +11,7 @@ type PaginationProps = {
   firstItem: number
   lastItem: number
   totalItems: number
+  itemsPerPageLabel?: string
   onPageChange: (page: number) => void
   onRowsPerPageChange: (rowsPerPage: number) => void
 }
@@ -28,13 +29,14 @@ export function Pagination({
   firstItem,
   lastItem,
   totalItems,
+  itemsPerPageLabel = 'Rows per page:',
   onPageChange,
   onRowsPerPageChange,
 }: PaginationProps) {
   return (
     <nav className={styles.pagination} aria-label="Pagination">
       <label className={styles.rowsPerPageLabel}>
-        Rows per page:
+        {itemsPerPageLabel}
         <select
           value={rowsPerPage}
           onChange={(event) => onRowsPerPageChange(Number(event.target.value))}

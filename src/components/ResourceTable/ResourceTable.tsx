@@ -4,6 +4,7 @@ import { ResourceTableHeader } from '../ResourceTableHeader/ResourceTableHeader'
 import { resourceTableColumns } from '../ResourceTableHeader/resourceTableColumns'
 import { ResourceTableRow } from '../ResourceTableRow/ResourceTableRow'
 import styles from './ResourceTable.module.css'
+import { EmptyState } from '../EmptyState/EmptyState'
 
 type ResourceTableProps = {
   resources: readonly Resource[]
@@ -25,7 +26,11 @@ export function ResourceTable({
         <tbody>
           {resources.length === 0 ? (
             <tr>
-              <td colSpan={resourceTableColumns.length}>No resources found.</td>
+              <td colSpan={resourceTableColumns.length}>
+                <EmptyState className={styles.emptyState}>
+                  <p>No resources found.</p>
+                </EmptyState>
+              </td>
             </tr>
           ) : (
             resources.map((resource) => (

@@ -1,0 +1,9 @@
+.emptyState {
+    border: 3px dashed var(--card-border-color);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #f8fafc;
+    color: var(--text-color);
+}

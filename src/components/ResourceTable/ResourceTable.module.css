@@ -42,3 +42,7 @@
   border-bottom: none;
   background: #fafafa;
 }
+
+.emptyState {
+  min-height: 10rem;
+}

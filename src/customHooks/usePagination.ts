@@ -1,21 +1,20 @@
 import { useState } from 'react'
-import type { Resource } from '../domain/resource'
 
 const defaultRowsPerPage = 5
 
-export function useResourcePagination(resources: readonly Resource[]) {
+export function usePagination<T>(items: readonly T[]) {
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage, setRowsPerPage] = useState(defaultRowsPerPage)
-  const totalItems = resources.length
+  const totalItems = items.length
   const isAllRowsSelected = rowsPerPage === -1
   const totalPages = isAllRowsSelected
     ? 1
     : Math.max(1, Math.ceil(totalItems / rowsPerPage))
-  const firstResourceIndex = (currentPage - 1) * rowsPerPage
-  const paginatedResources = isAllRowsSelected
-    ? resources
-    : resources.slice(firstResourceIndex, firstResourceIndex + rowsPerPage)
-  const firstItem = totalItems === 0 ? 0 : firstResourceIndex + 1
+  const firstItemIndex = (currentPage - 1) * rowsPerPage
+  const paginatedItems = isAllRowsSelected
+    ? items
+    : items.slice(firstItemIndex, firstItemIndex + rowsPerPage)
+  const firstItem = totalItems === 0 ? 0 : firstItemIndex + 1
   const lastItem = isAllRowsSelected
     ? totalItems
     : Math.min(currentPage * rowsPerPage, totalItems)
@@ -40,7 +39,7 @@ export function useResourcePagination(resources: readonly Resource[]) {
     totalPages,
     firstItem,
     lastItem,
-    paginatedResources,
+    paginatedItems,
     goToPage,
     changeRowsPerPage,
     resetPage,

@@ -5,7 +5,7 @@ import { Selection } from '../../components/Selection/Selection'
 import { ResourceFilters } from '../../components/ResourceFilters/ResourceFilters'
 import { ResourceSearch } from '../../components/ResourceSearch/ResourceSearch'
 import { ResourceTable } from '../../components/ResourceTable/ResourceTable'
-import { useResourcePagination } from '../../customHooks/useResourcePagination'
+import { usePagination } from '../../customHooks/usePagination'
 import { useResourceQueryParams } from '../../customHooks/useResourceQueryParams'
 import { useResourceSearch } from '../../customHooks/useResourceSearch'
 import { useResourceSelection } from '../../customHooks/useResourceSelection'
@@ -26,7 +26,7 @@ export function ResourcesPage() {
     clearFilters,
   } = useResourceQueryParams()
   const filteredResources = filterResources(resources, { search, filters })
-  const pagination = useResourcePagination(filteredResources)
+  const pagination = usePagination(filteredResources)
   const selection = useResourceSelection()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { createApplication } = useApplications();
@@ -84,7 +84,7 @@ export function ResourcesPage() {
       </div>
 
       <ResourceTable
-        resources={pagination.paginatedResources}
+        resources={pagination.paginatedItems}
         selectedIds={selection.selectedResourceIds}
         onToggle={selection.toggleResource}
         footer={

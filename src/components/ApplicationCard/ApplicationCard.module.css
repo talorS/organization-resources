@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--card-border-color);
+  border-radius: 8px;
+  background: white;
+  color: var(--text-color);
+}
+
+.cardSelected {
+  outline: 2px solid var(--primary-color);
+  outline-offset: -2px;
+}
+
+.cardTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.fieldLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.fieldValue {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.cardAction {
+  margin-top: auto;
+}
+
+.cardAction button {
+  width: 100%;
+}
