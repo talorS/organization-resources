@@ -23,6 +23,13 @@ export function ApplicationCard({
       <h2 className={styles.cardTitle}>{application.name}</h2>
 
       <div className={styles.field}>
+        <span className={styles.fieldLabel}>Description:</span>
+        <span className={styles.fieldValue}>
+          {application.description || "No description"}
+        </span>
+      </div>
+
+      <div className={styles.field}>
         <span className={styles.fieldLabel}>Resources count:</span>
         <span className={styles.fieldValue}>
           {resourceCount} resource{resourceCount === 1 ? "" : "s"}

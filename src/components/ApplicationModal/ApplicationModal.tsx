@@ -5,14 +5,15 @@ import { Button } from '../Button/Button'
 import styles from './ApplicationModal.module.css'
 
 type ApplicationModalProps = {
-    onCreate: ({ name }: { name: string }) => void
+    onCreate: ({ name, description }: { name: string; description?: string }) => void
     onClose: () => void
 }
 
 export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
-    const [name, setName] = useState('')
-    const normalizedName = name.trim()
-    const canSubmit = normalizedName.length > 0
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const normalizedName = name.trim();
+    const canSubmit = normalizedName.length > 0;
 
     function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -20,7 +21,7 @@ export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
         if (!canSubmit) {
             return
         }
-        onCreate({ name: normalizedName });
+        onCreate({ name: normalizedName, description: description.trim() });
     }
 
     return (
@@ -36,6 +37,15 @@ export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
                         onChange={(event) => setName(event.target.value)}
                         placeholder="Application name"
                         autoFocus
+                    />
+                </Field>
+                <Field label="Description">
+                    <textarea
+                        id="application-description"
+                        className={styles.textarea}
+                        value={description}
+                        onChange={(event) => setDescription(event.target.value)}
+                        placeholder="Application Description"
                     />
                 </Field>
                 <div className={styles.actions}>

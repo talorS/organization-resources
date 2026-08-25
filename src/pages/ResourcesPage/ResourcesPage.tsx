@@ -51,9 +51,10 @@ export function ResourcesPage() {
     onDebouncedSearch: handleDebouncedSearch,
   })
 
-  function handleCreateApplication({ name }: { name: string }) {
+  function handleCreateApplication({ name, description }: { name: string; description?: string }) {
     createApplication({
       name,
+      description,
       resourceIds: selection.selectedResourceIds,
     })
     selection.clearSelection()
