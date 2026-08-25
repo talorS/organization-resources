@@ -93,9 +93,8 @@ src/
 
 ## Chunk 5 — Resource selection
 
-- Add checkbox selection to table rows.
 - Implement `useResourceSelection`.
-- Add `SelectionBar`.
+- Add `Selection`.
 - Preserve selected IDs across search and filter changes.
 
 **TDD:** RED → GREEN → REFACTOR for selection, deselection, clear action, count, and preserved selection.
@@ -109,10 +108,9 @@ src/
 - Add shared in-memory Application state at the app/router-layout level.
 - Implement `ApplicationModal`.
 - Display selected Resources in the modal.
-- Require a trimmed name; description is optional.
+- Require a trimmed name.
 - Create the Application with selected `resourceIds`.
-- Navigate to `/applications`.
-- Ensure the modal can be operated with a keyboard.
+- on creation show a toast.
 
 **TDD:** RED → GREEN → REFACTOR for opening the modal, validation, creation, and navigation.
 

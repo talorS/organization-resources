@@ -1,9 +1,7 @@
 import { useState } from 'react'
 
 export function useResourceSelection() {
-  const [selectedResourceIds, setSelectedResourceIds] = useState<
-    readonly string[]
-  >([])
+  const [selectedResourceIds, setSelectedResourceIds] = useState<string[]>([])
 
   function toggleResource(resourceId: string) {
     setSelectedResourceIds((currentIds) =>

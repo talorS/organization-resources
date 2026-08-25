@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { ApplicationModal } from '../../components/ApplicationModal/ApplicationModal'
 import { Pagination } from '../../components/Pagination/Pagination'
 import { Selection } from '../../components/Selection/Selection'
 import { ResourceFilters } from '../../components/ResourceFilters/ResourceFilters'
@@ -24,6 +26,7 @@ export function ResourcesPage() {
   const filteredResources = filterResources(resources, { search, filters })
   const pagination = useResourcePagination(filteredResources)
   const selection = useResourceSelection()
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   function handleDebouncedSearch(nextSearch: string) {
     pagination.resetPage()
@@ -85,8 +88,14 @@ export function ResourcesPage() {
         <Selection
           count={selection.selectedCount}
           onClear={selection.clearSelection}
-          onCreate={() => { }}
+          onCreate={() => setIsModalOpen(true)}
         />
+      )}
+
+      {isModalOpen && (
+        <ApplicationModal
+          selectedIds={selection.selectedResourceIds}
+          onClose={() => setIsModalOpen(false)} />
       )}
     </div>
   )

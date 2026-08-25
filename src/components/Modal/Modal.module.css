@@ -1,0 +1,33 @@
+.dialog {
+  width: min(32rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--card-border-color);
+  border-radius: 8px;
+  background: var(--background-color);
+  color: var(--text-color);
+  box-shadow: 0 16px 48px rgb(0 0 0 / 20%);
+}
+
+.dialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--card-border-color);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.content {
+  padding: 1.25rem;
+}

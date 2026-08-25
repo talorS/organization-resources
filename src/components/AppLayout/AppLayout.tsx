@@ -1,13 +1,14 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import styles from "./AppLayout.module.css";
+import { useApplicationsState } from '../../customHooks/useApplications'
+import styles from './AppLayout.module.css'
 
 export function AppLayout() {
+  const applicationsContext = useApplicationsState()
+
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
-        <span className={styles.brand}>
-           @Talor Samara - Gambit's FE Assignment
-        </span>
+        <span className={styles.brand}>@Talor Samara - Gambit's FE Assignment</span>
         <nav className={styles.nav}>
           <NavLink
             to="/"
@@ -29,8 +30,8 @@ export function AppLayout() {
         </nav>
       </header>
       <main className={styles.main}>
-        <Outlet />
+        <Outlet context={applicationsContext} />
       </main>
     </div>
-  );
+  )
 }

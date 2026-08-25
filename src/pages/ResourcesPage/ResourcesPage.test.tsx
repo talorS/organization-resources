@@ -190,4 +190,25 @@ describe('ResourcesPage', () => {
     })
   })
 
+  it('should open the Application modal from the selection bar', async () => {
+    const user = userEvent.setup()
+    renderResourcesPage()
+
+    await user.click(
+      screen.getByRole('row', {
+        name: /payments-api-prod EC2 Instance AWS production critical 4/,
+      }),
+    )
+    await user.click(
+      screen.getByRole('button', { name: 'Create Application' }),
+    )
+
+    expect(
+      screen.getByRole('heading', {
+        name: 'Create Application',
+        hidden: true,
+      }),
+    ).toBeInTheDocument()
+  })
+
 })

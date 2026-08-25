@@ -4,3 +4,5 @@ export type Application = {
   description?: string
   resourceIds: string[]
 }
+
+export type CreateApplication = Omit<Application, 'id'>
