@@ -1,5 +1,8 @@
+import { useState } from 'react'
+import { ApplicationGraph } from '../../components/ApplicationGraph/ApplicationGraph'
 import { ApplicationList } from '../../components/ApplicationList/ApplicationList'
 import { EmptyState } from '../../components/EmptyState/EmptyState'
+import { Modal } from '../../components/Modal/Modal'
 import { Pagination } from '../../components/Pagination/Pagination'
 import { useApplications } from '../../customHooks/useApplications'
 import { usePagination } from '../../customHooks/usePagination'
@@ -8,6 +11,10 @@ import styles from './ApplicationsPage.module.css'
 export function ApplicationsPage() {
   const { applications } = useApplications()
   const pagination = usePagination(applications)
+  const [selectedApplicationId, setSelectedApplicationId] = useState<string | null>(null)
+  const selectedApplication = applications.find(
+    (application) => application.id === selectedApplicationId,
+  )
 
   return (
     <div>
@@ -23,8 +30,8 @@ export function ApplicationsPage() {
         <section className={styles.listSection} aria-label="Applications">
           <ApplicationList
             applications={pagination.paginatedItems}
-            selectedApplicationId={null}
-            onSelectApplication={() => {}}
+            selectedApplicationId={selectedApplicationId}
+            onSelectApplication={setSelectedApplicationId}
           />
           <Pagination
             currentPage={pagination.currentPage}
@@ -38,6 +45,15 @@ export function ApplicationsPage() {
             onRowsPerPageChange={pagination.changeRowsPerPage}
           />
         </section>
+      )}
+
+      {selectedApplication && (
+        <Modal
+          title={`Application: ${selectedApplication.name}`}
+          onClose={() => setSelectedApplicationId(null)}
+        >
+          <ApplicationGraph application={selectedApplication} />
+        </Modal>
       )}
     </div>
   )
