@@ -1,5 +1,5 @@
-import CloseIcon from '@mui/icons-material/Close'
 import { type ReactNode, useEffect, useRef } from 'react'
+import closeIcon from '../../assets/icons/close.svg'
 import { Button } from '../Button/Button'
 import styles from './Modal.module.css'
 
@@ -38,7 +38,7 @@ export function Modal({ title, onClose, children }: ModalProps) {
           title="Close"
           onClick={onClose}
         >
-          <CloseIcon />
+          <img className={styles.closeIcon} src={closeIcon} alt="" />
         </Button>
       </header>
       <div className={styles.content}>{children}</div>

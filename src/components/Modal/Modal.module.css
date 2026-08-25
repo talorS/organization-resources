@@ -31,3 +31,8 @@
 .content {
   padding: 1.25rem;
 }
+
+.closeIcon {
+  width: 1rem;
+  height: 1rem;
+}

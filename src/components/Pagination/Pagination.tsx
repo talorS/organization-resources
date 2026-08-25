@@ -1,7 +1,7 @@
-import FirstPageRoundedIcon from '@mui/icons-material/FirstPageRounded'
-import LastPageRoundedIcon from '@mui/icons-material/LastPageRounded'
-import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded'
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded'
+import firstPageIcon from '../../assets/icons/first-page.svg'
+import previousPageIcon from '../../assets/icons/previous-page.svg'
+import nextPageIcon from '../../assets/icons/next-page.svg'
+import lastPageIcon from '../../assets/icons/last-page.svg'
 import styles from './Pagination.module.css'
 
 type PaginationProps = {
@@ -52,41 +52,17 @@ export function Pagination({
         {firstItem}-{lastItem} of {totalItems}
       </span>
       <div className={styles.actions}>
-        <button
-          type="button"
-          onClick={() => onPageChange(1)}
-          disabled={currentPage === 1}
-          aria-label="Go to first page"
-          title="Go to first page"
-        >
-          <FirstPageRoundedIcon />
+        <button type="button" onClick={() => onPageChange(1)} disabled={currentPage === 1} aria-label="Go to first page" title="Go to first page">
+          <img src={firstPageIcon} alt="" />
         </button>
-        <button
-          type="button"
-          onClick={() => onPageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          aria-label="Go to previous page"
-          title="Go to previous page"
-        >
-          <ChevronLeftRoundedIcon />
+        <button type="button" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1} aria-label="Go to previous page" title="Go to previous page">
+          <img src={previousPageIcon} alt="" />
         </button>
-        <button
-          type="button"
-          onClick={() => onPageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          aria-label="Go to next page"
-          title="Go to next page"
-        >
-          <ChevronRightRoundedIcon />
+        <button type="button" onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages} aria-label="Go to next page" title="Go to next page">
+          <img src={nextPageIcon} alt="" />
         </button>
-        <button
-          type="button"
-          onClick={() => onPageChange(totalPages)}
-          disabled={currentPage === totalPages}
-          aria-label="Go to last page"
-          title="Go to last page"
-        >
-          <LastPageRoundedIcon />
+        <button type="button" onClick={() => onPageChange(totalPages)} disabled={currentPage === totalPages} aria-label="Go to last page" title="Go to last page">
+          <img src={lastPageIcon} alt="" />
         </button>
       </div>
     </nav>
