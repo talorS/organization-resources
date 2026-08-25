@@ -27,6 +27,9 @@ export type ResourceFilterKey = (typeof resourceFilterKeys)[number]
 
 export type ResourceFilters = Partial<
   Pick<Resource, ResourceFilterKey>
-> & {
-  search?: string
-}
+>
+
+export type ResourceQuery = Partial<{
+  search: string
+  filters: ResourceFilters
+}>

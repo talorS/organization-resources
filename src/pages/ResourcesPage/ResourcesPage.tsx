@@ -14,7 +14,7 @@ export function ResourcesPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>Resources</h1>
         <p className={styles.subtitle}>
-          Select resources to group into an Application
+          Search, filter or select resources to group into an Application
         </p>
       </header>
 

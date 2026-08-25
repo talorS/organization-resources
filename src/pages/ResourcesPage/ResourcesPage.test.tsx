@@ -22,7 +22,7 @@ describe('ResourcesPage', () => {
     ).not.toBeInTheDocument()
   })
 
-  it('shows the next five resources after navigating to the next page', async () => {
+  it('should show the next five resources after navigating to the next page', async () => {
     const user = userEvent.setup()
     render(<ResourcesPage />)
 

@@ -1,21 +1,27 @@
-import { resourceFilterKeys, type Resource, type ResourceFilters } from '../domain/resource'
+import {
+  resourceFilterKeys,
+  type Resource,
+  type ResourceQuery,
+} from '../domain/resource'
 
 export function filterResources(
   resources: readonly Resource[],
-  filters: ResourceFilters = {},
+  query: ResourceQuery = {},
 ): Resource[] {
-  const { search = '', ...restFilters } = filters;
-  const normalizedSearch = search.toLowerCase();
+  const { search = '', filters = {} } = query;
+  const normalizedSearch = search.toLowerCase()
 
   return resources.filter((resource) => {
     const matchesSearch = resource.name
       .toLowerCase()
-      .includes(normalizedSearch);
+      .includes(normalizedSearch)
 
     const matchesFilters = resourceFilterKeys.every(
-      (key) => !restFilters[key] || resource[key] === restFilters[key],
+      (key) =>
+        filters[key] === undefined ||
+        resource[key] === filters[key],
     )
 
-    return matchesSearch && matchesFilters;
-  });
+    return matchesSearch && matchesFilters
+  })
 }

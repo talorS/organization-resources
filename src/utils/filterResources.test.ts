@@ -42,10 +42,8 @@ const resources: Resource[] = [
 ]
 
 describe('filterResources', () => {
-  it('should return all resources when search and filters are empty', () => {
-    expect(
-      filterResources(resources),
-    ).toEqual(resources)
+  it('should return all resources when the query is omitted', () => {
+    expect(filterResources(resources)).toEqual(resources)
   })
 
   it('should match a partial resource name case-insensitively', () => {
@@ -59,8 +57,7 @@ describe('filterResources', () => {
   it('should filter by provider', () => {
     expect(
       filterResources(resources, {
-        search: '',
-        provider: 'GCP',
+        filters: { provider: 'GCP' },
       }),
     ).toEqual([resources[1]])
   })
@@ -68,9 +65,10 @@ describe('filterResources', () => {
   it('should filter by environment and severity together', () => {
     expect(
       filterResources(resources, {
-        search: '',
-        environment: 'production',
-        severity: 'high',
+        filters: {
+          environment: 'production',
+          severity: 'high',
+        },
       }),
     ).toEqual([resources[2]])
   })
@@ -79,9 +77,11 @@ describe('filterResources', () => {
     expect(
       filterResources(resources, {
         search: 'database',
-        provider: 'AWS',
-        environment: 'production',
-        severity: 'high',
+        filters: {
+          provider: 'AWS',
+          environment: 'production',
+          severity: 'high',
+        },
       }),
     ).toEqual([resources[2]])
   })
@@ -89,7 +89,7 @@ describe('filterResources', () => {
   it('should return an empty array when nothing matches', () => {
     expect(
       filterResources(resources, {
-        search: 'missing'
+        search: 'missing',
       }),
     ).toEqual([])
   })
