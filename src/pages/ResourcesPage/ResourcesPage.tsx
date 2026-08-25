@@ -13,6 +13,8 @@ import type { ResourceFilters as ResourceFiltersValue } from '../../domain/resou
 import { resources } from '../../seed/resources'
 import { filterResources } from '../../utils/filterResources'
 import styles from './ResourcesPage.module.css'
+import { useApplications } from '../../customHooks/useApplications'
+import { toast } from 'react-toastify'
 
 export function ResourcesPage() {
   const {
@@ -27,6 +29,7 @@ export function ResourcesPage() {
   const pagination = useResourcePagination(filteredResources)
   const selection = useResourceSelection()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const { createApplication } = useApplications();
 
   function handleDebouncedSearch(nextSearch: string) {
     pagination.resetPage()
@@ -47,6 +50,19 @@ export function ResourcesPage() {
     search,
     onDebouncedSearch: handleDebouncedSearch,
   })
+
+  function handleCreateApplication({ name }: { name: string }) {
+    createApplication({
+      name,
+      resourceIds: selection.selectedResourceIds,
+    })
+    selection.clearSelection()
+    setIsModalOpen(false)
+    toast.success('Application created successfully', {
+      position: 'top-center',
+      autoClose: 500,
+    })
+  }
 
   return (
     <div className={styles.page}>
@@ -94,7 +110,7 @@ export function ResourcesPage() {
 
       {isModalOpen && (
         <ApplicationModal
-          selectedIds={selection.selectedResourceIds}
+          onCreate={handleCreateApplication}
           onClose={() => setIsModalOpen(false)} />
       )}
     </div>

@@ -1,19 +1,16 @@
 import { useState, type SubmitEvent } from 'react'
-import { toast } from 'react-toastify'
 import { Modal } from '../Modal/Modal'
 import { Field } from '../Field/Field'
 import { Button } from '../Button/Button'
 import styles from './ApplicationModal.module.css'
-import { useApplications } from '../../customHooks/useApplications'
 
 type ApplicationModalProps = {
-    selectedIds: string[];
+    onCreate: ({ name }: { name: string }) => void
     onClose: () => void
 }
 
-export function ApplicationModal({ onClose, selectedIds }: ApplicationModalProps) {
+export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
     const [name, setName] = useState('')
-    const { createApplication } = useApplications();
     const normalizedName = name.trim()
     const canSubmit = normalizedName.length > 0
 
@@ -23,13 +20,7 @@ export function ApplicationModal({ onClose, selectedIds }: ApplicationModalProps
         if (!canSubmit) {
             return
         }
-        createApplication({ name: normalizedName, resourceIds: selectedIds })
-
-        toast.success('Application created successfully', { 
-            position: "top-center",
-            autoClose: 500,
-        })
-        onClose()
+        onCreate({ name: normalizedName });
     }
 
     return (
