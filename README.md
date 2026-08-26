@@ -1,3 +1,5 @@
+Live Link: https://organization-resources.vercel.app/
+
 # Gambit Security Frontend Assignment
 
 A responsive React application for browsing cloud resources, creating logical
