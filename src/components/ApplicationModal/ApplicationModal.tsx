@@ -27,7 +27,7 @@ export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
     return (
         <Modal title="Create Application" onClose={onClose}>
             <form className={styles.form} onSubmit={handleSubmit}>
-                <Field label="Name">
+                <Field label="Name" required>
                     <input
                         id="application-name"
                         className={styles.input}
@@ -36,7 +36,7 @@ export function ApplicationModal({ onCreate, onClose }: ApplicationModalProps) {
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                         placeholder="Application name"
-                        autoFocus
+                        required
                     />
                 </Field>
                 <Field label="Description">
