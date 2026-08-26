@@ -40,6 +40,8 @@ Open the local URL shown in the terminal.
 - Replace local mock data and in-memory state with a backend API.
 - Persist Applications and support editing or deletion.
 - Add server-side filtering and pagination for large datasets.
+- For a larger dataset, profile the page and move high-frequency state updates, such as search input, 
+  closer to the component that uses it. Add memoization only if profiling shows expensive renders.
 
 ## AI usage
 
