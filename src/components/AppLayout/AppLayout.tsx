@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { useApplicationsState } from '../../customHooks/useApplications'
 import styles from './AppLayout.module.css'
+import clsx from 'clsx'
 
 export function AppLayout() {
   const applicationsContext = useApplicationsState()
@@ -13,16 +14,18 @@ export function AppLayout() {
           <NavLink
             to="/"
             end
-            className={({ isActive }) =>
-              `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ''}`
+            className={({ isActive }) => clsx(
+              styles.navLink,
+              isActive && styles.navLinkActive)
             }
           >
             Resources
           </NavLink>
           <NavLink
             to="/applications"
-            className={({ isActive }) =>
-              `${styles.navLink}${isActive ? ` ${styles.navLinkActive}` : ''}`
+            className={({ isActive }) => clsx(
+              styles.navLink,
+              isActive && styles.navLinkActive)
             }
           >
             Applications
